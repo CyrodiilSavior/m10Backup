@@ -16,7 +16,7 @@ public:
     ~NewBackup();
 
 private slots:
-    void on_pushButton_clicked();
+    bool on_pushButton_clicked();
 
     void on_backupOnce_clicked();
 

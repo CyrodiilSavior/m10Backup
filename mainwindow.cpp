@@ -12,7 +12,38 @@
 #include <newbackup.h>
 #include <QDataStream>
 #include <QList>
+#include <databasemanager.h>
 
+DatabaseManager d;
+QList<QList<QString> > databaseItems;
+QList<QString> IDs;
+QList<QString> BackupNames;
+QList<QString> BackupFrom;
+QList<QString> BackupTo;
+
+
+int MainWindow::getCurrentID()
+{
+    int myCount = ui->listWidget_2->count();
+}
+
+void MainWindow::refresh()
+{
+    qDebug() << "Refreshing..." << endl;
+
+
+    ui->listWidget_2->clear();
+    databaseItems = d.update();
+    IDs = databaseItems.at(0);
+    BackupNames = databaseItems.at(1);
+    BackupFrom = databaseItems.at(2);
+    BackupTo = databaseItems.at(3);
+
+    for(int i=0;i<IDs.length();i++){
+        ui->listWidget_2->addItem(BackupNames.at(i));
+        qDebug() << "IDS: " << IDs.at(i);
+    }
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,11 +52,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     ui->progressBar->setVisible(false);
+    d.connect();
+    refresh();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -132,8 +166,17 @@ void MainWindow::on_actionLoad_Previous_Backup_triggered()
     fileToRead.flush();
     fileToRead.close();
 
-    for(int i = 0; i< myPrefs.length(); i++){
-            qDebug() << myPrefs.at(i);
+    for(int i =0; i<myPrefs.length();i++){
+        qDebug() <<myPrefs.at(i) << endl;
     }
 
+    d.addNewBackup(getCurrentID(),myPrefs.at(1),myPrefs.at(2),myPrefs.at(3),myPrefs.at(4));
+
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+        refresh();
+
+ }

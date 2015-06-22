@@ -12,6 +12,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    int getCurrentID();
+    void refresh();
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -33,8 +35,8 @@ private:
 
 private slots:
     void setMyPercent(int percent);
-
     void on_actionLoad_Previous_Backup_triggered();
+    void on_pushButton_2_clicked();
 };
 
 #endif // MAINWINDOW_H

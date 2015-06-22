@@ -22,11 +22,12 @@ NewBackup::~NewBackup()
     delete ui;
 }
 
-void NewBackup::on_pushButton_clicked()
+bool NewBackup::on_pushButton_clicked()
 {
     //Create List Object to store all
     QList<QString> myPrefs;
     myPrefs.append("*** THIS IS AN M10 BACKUP PREFERENCES FILE ***");
+    myPrefs.append(ui->lineEdit_bName->text());
     myPrefs.append(ui->lineEdit_backupFrom->text());
     myPrefs.append(ui->lineEdit_outputFolder->text());
     if(ui->backupOnce->isChecked()){
@@ -64,6 +65,10 @@ void NewBackup::on_pushButton_clicked()
                 fileToWrite.flush();
                 fileToWrite.close();
 
+
+    //Add to Database
+
+    this->close();
 }
 
 void NewBackup::on_backupOnce_clicked()

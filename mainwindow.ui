@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>859</width>
+    <width>1246</width>
     <height>491</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>10</y>
+      <x>740</x>
+      <y>20</y>
       <width>121</width>
       <height>17</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>40</y>
+      <x>740</x>
+      <y>50</y>
       <width>491</width>
       <height>321</height>
      </rect>
@@ -40,8 +40,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>390</x>
+      <y>20</y>
       <width>121</width>
       <height>17</height>
      </rect>
@@ -53,8 +53,8 @@
    <widget class="QLineEdit" name="lineEdit_backupFrom">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>30</y>
+      <x>390</x>
+      <y>40</y>
       <width>311</width>
       <height>27</height>
      </rect>
@@ -66,8 +66,8 @@
    <widget class="QLineEdit" name="lineEdit_outputFolder">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>110</y>
+      <x>390</x>
+      <y>120</y>
       <width>311</width>
       <height>27</height>
      </rect>
@@ -79,8 +79,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>90</y>
+      <x>390</x>
+      <y>100</y>
       <width>141</width>
       <height>17</height>
      </rect>
@@ -95,8 +95,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>410</y>
+      <x>390</x>
+      <y>420</y>
       <width>841</width>
       <height>23</height>
      </rect>
@@ -111,8 +111,8 @@
    <widget class="QPushButton" name="button1">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>30</y>
+      <x>700</x>
+      <y>40</y>
       <width>21</width>
       <height>27</height>
      </rect>
@@ -124,8 +124,8 @@
    <widget class="QPushButton" name="button2">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>110</y>
+      <x>700</x>
+      <y>120</y>
       <width>21</width>
       <height>27</height>
      </rect>
@@ -137,8 +137,8 @@
    <widget class="QPushButton" name="button3">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>340</y>
+      <x>620</x>
+      <y>350</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -150,8 +150,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>708</x>
-      <y>370</y>
+      <x>1088</x>
+      <y>380</y>
       <width>141</width>
       <height>27</height>
      </rect>
@@ -160,14 +160,50 @@
      <string>Extract mtb Data</string>
     </property>
    </widget>
+   <widget class="QListWidget" name="listWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>371</width>
+      <height>391</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Current Backups:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>420</y>
+      <width>115</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Refresh...</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>859</width>
-     <height>25</height>
+     <width>1246</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBackup">

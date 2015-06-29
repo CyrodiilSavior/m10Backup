@@ -12,7 +12,9 @@
 #include <newbackup.h>
 #include <QDataStream>
 #include <QList>
+#include <QDir>
 #include <databasemanager.h>
+
 
 DatabaseManager d;
 QList<QList<QString> > databaseItems;
@@ -20,36 +22,56 @@ QList<QString> IDs;
 QList<QString> BackupNames;
 QList<QString> BackupFrom;
 QList<QString> BackupTo;
-
+bool isBackingUp = false;
+//ThreadManager *t;
 
 int MainWindow::getCurrentID()
 {
     int myCount = ui->listWidget_2->count();
 }
 
+
 void MainWindow::refresh()
 {
     qDebug() << "Refreshing..." << endl;
-
-
     ui->listWidget_2->clear();
     databaseItems = d.update();
     IDs = databaseItems.at(0);
     BackupNames = databaseItems.at(1);
     BackupFrom = databaseItems.at(2);
     BackupTo = databaseItems.at(3);
-
     for(int i=0;i<IDs.length();i++){
         ui->listWidget_2->addItem(BackupNames.at(i));
         qDebug() << "IDS: " << IDs.at(i);
     }
 }
 
+void MainWindow::toggleIsBackingUp()
+{
+    if(isBackingUp = true){
+        isBackingUp = false;
+    }
+    else if(isBackingUp = false){
+        isBackingUp = true;
+    }
+    else{
+        return;
+    }
+}
+
+
+void MainWindow::changeUI(int conformID)
+{
+
+    ui->lineEdit_backupFrom->setText(BackupFrom.at(conformID));
+    ui->lineEdit_outputFolder->setText(BackupTo.at(conformID));
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
+    //this->setWindowFlags(Qt::);
     ui->setupUi(this);
     ui->progressBar->setVisible(false);
     d.connect();
@@ -109,7 +131,10 @@ void MainWindow::on_button3_released()
     if(ui->lineEdit_backupFrom->text()==""&&ui->lineEdit_outputFolder->text()==""){
         return;
     }
-
+    if(isBackingUp){
+        QMessageBox::warning(this,"WARNING!","There is already a backup being run! Please wait till it finishes before starting a new one.");
+        return;
+    }
     //Perform Backup
     ui->progressBar->setVisible(true);
     QString backupFrom = ui->lineEdit_backupFrom->text();
@@ -125,6 +150,7 @@ void MainWindow::on_button3_released()
     ThreadManager mThread;
     ProgressThread* p = new ProgressThread;
     p->setParent(this);
+    isBackingUp = true;
     mThread.setBackupFrom(backupFrom);
     mThread.setBackupTo(backupTo);
     p->setFinalFile(backupTo);
@@ -171,7 +197,7 @@ void MainWindow::on_actionLoad_Previous_Backup_triggered()
     }
 
     d.addNewBackup(getCurrentID(),myPrefs.at(1),myPrefs.at(2),myPrefs.at(3),myPrefs.at(4));
-
+    refresh();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -180,3 +206,29 @@ void MainWindow::on_pushButton_2_clicked()
         refresh();
 
  }
+
+void MainWindow::on_listWidget_2_itemSelectionChanged()
+{
+    QList<QListWidgetItem *> itemsSelected = ui->listWidget_2->selectedItems();
+    if(itemsSelected.length()==1){
+         QString itemSelected = itemsSelected.at(0)->text();
+         qDebug() << "You have selected" << itemSelected;
+         int id=0;
+         for(int i=0;i<ui->listWidget_2->count();i++){
+             if(ui->listWidget_2->item(i)->text()==itemSelected){
+                 qDebug("Match!");
+                 qDebug() << "ID is" << id;
+                 break;
+             }
+             else{
+                 id++;
+             }
+         }
+        changeUI(id);
+    }
+    else
+    {
+        qDebug() << "Too many things selected!" << endl;
+    }
+}
+

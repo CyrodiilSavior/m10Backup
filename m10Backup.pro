@@ -16,14 +16,15 @@ TEMPLATE = app
 
 #Set Vars
 
+
 macx {
-    QUAZIPCODEDIR_MAC = "/Users/garrett/Desktop/ZipStuff/quazip-0.7.1/quazip"
-    ZLIBCODEDIR_MAC = "/Users/garrett/Desktop/ZipStuff/Libs"
+    QUAZIPCODEDIR = "/Users/garrett/Desktop/ZipStuff/quazip-0.7.1/quazip"
+    ZLIBCODEDIR = "/Users/garrett/Desktop/ZipStuff/Libs"
 }
 
 unix:!macx{
-    QUAZIPCODEDIR_LINUX = "/home/garrett/Desktop/ZipStuff/quazip-0.7.1/quazip"
-    ZLIBCODEDIR_LINUX = "/home/garrett/Desktop/ZipStuff/Libs"
+    QUAZIPCODEDIR = "/home/garrett/Desktop/ZipStuff/quazip-0.7.1/quazip"
+    ZLIBCODEDIR = "/home/garrett/Desktop/ZipStuff/Libs"
 }
 
 

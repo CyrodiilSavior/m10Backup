@@ -12,8 +12,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    bool isBackingUp;
     int getCurrentID();
     void refresh();
+    void toggleIsBackingUp();
+    void changeUI(int conformID);
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -37,6 +40,7 @@ private slots:
     void setMyPercent(int percent);
     void on_actionLoad_Previous_Backup_triggered();
     void on_pushButton_2_clicked();
+    void on_listWidget_2_itemSelectionChanged();
 };
 
 #endif // MAINWINDOW_H

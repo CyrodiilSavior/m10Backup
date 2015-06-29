@@ -24,6 +24,10 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_button1_clicked();
+
+    void on_button2_clicked();
+
 private:
     Ui::NewBackup *ui;
 };

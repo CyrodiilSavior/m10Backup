@@ -3,11 +3,12 @@
 #include <QDebug>
 #include <mainwindow.h>
 
+#include <progressthread.h>
 double finalEstSize;
 QString finalFile;
 int percent;
 MainWindow* myParent;
-
+int running = 1;
 
 void ProgressThread::setEstSize(double size)
 {
@@ -49,12 +50,26 @@ void ProgressThread::run(){
        QObject::connect(this,SIGNAL(valueChanged(int)),myParent,SLOT(setMyPercent(int)));
        emit valueChanged(percent);
        double diff = finalEstSize - currentSize;
-       if(diff < 4096){
-           percent = 100;
-           isRunning = false;
+       qDebug() << "Difference is " << diff;
+
+       if(running == 1){
+           qDebug() << "Still running..." << endl;
        }
+       else{
+           break;
+       }
+
     }
 }
+
+void ProgressThread::setDone()
+{
+
+    running = 0;
+    emit valueChanged(0);
+
+    }
+
 
 double ProgressThread::checkCurrentSize(QString inputfile){
    QFile myFile(inputfile);

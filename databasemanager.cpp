@@ -26,7 +26,7 @@
          QList<QString> BackupNames;
          QList<QString> BackupFrom;
          QList<QString> BackupTo;
-
+         myItems.clear();
          //Populate IDs
          QString tmp;
          if(qry.exec("SELECT ID FROM Backups")){
@@ -40,6 +40,7 @@
          if(qry.exec("SELECT \"Backup Name\" FROM Backups")){
              while(qry.next()){
                  tmp = qry.value(0).toString();
+                 qDebug() << "tmp = " << tmp;
                  BackupNames.append(tmp);
              }
          }
@@ -60,8 +61,6 @@
              }
          }
 
-
-
          myItems.append(IDs);
          myItems.append(BackupNames);
          myItems.append(BackupFrom);
@@ -79,7 +78,7 @@
                  return myItems;
      }
      else
-         qDebug() << "Databse Failed1" << endl;
+         qDebug() << "Databse Failed!" << endl;
 
  }
 
@@ -112,6 +111,3 @@ DatabaseManager::~DatabaseManager()
 {
     myDb.close();
 }
-
-
-

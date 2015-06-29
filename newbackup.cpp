@@ -95,3 +95,20 @@ void NewBackup::on_pushButton_2_clicked()
 {
     this->close();
 }
+
+void NewBackup::on_button1_clicked()
+{
+    QString fileName = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+            "/",
+            QFileDialog::ShowDirsOnly
+            |QFileDialog::DontResolveSymlinks);
+     ui->lineEdit_backupFrom->setText(fileName);
+}
+
+void NewBackup::on_button2_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save m10 Backup file"), "",
+        tr("m10 Backup File (*.mtb);;All Files (*)"));
+    ui->lineEdit_outputFolder->setText(fileName);
+}

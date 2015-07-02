@@ -15,6 +15,8 @@ public:
     bool isBackingUp;
     int getCurrentID();
     void refresh();
+    bool checkForFileExists(QString fileLocation);
+    bool performBackup(QString from,QString to);
     void toggleIsBackingUp();
     void changeUI(int conformID);
     explicit MainWindow(QWidget *parent = 0);

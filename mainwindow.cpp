@@ -46,6 +46,8 @@ void MainWindow::refresh()
     }
 }
 
+
+
 void MainWindow::toggleIsBackingUp()
 {
     if(isBackingUp = true){
@@ -147,17 +149,57 @@ void MainWindow::on_button3_released()
 
         ui->lineEdit_outputFolder->setText(backupTo);
     }
+    if(!checkForFileExists(backupTo)){
+        performBackup(backupFrom,backupTo);
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.warning(this,"File Overwrite","Warning, you are about to overwrite a file! Do you wish to continue?");
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.setStandardButtons(QMessageBox::No);
+        int reg = msgBox.exec();
+
+        switch (reg){
+
+        case QMessageBox::Yes :
+            qDebug() << "You Pressed Yes!" << endl;
+            performBackup(backupFrom,backupTo);
+            break;
+        case QMessageBox::No :
+            qDebug() << " You Pressed No" << endl;
+            break;
+
+        }
+    }
+
+}
+
+bool MainWindow::checkForFileExists(QString fileLocation)
+{
+    //If I return False I do not exist
+    //If I return True I do exist
+
+    QFile testFile(fileLocation);
+    if(testFile.exists()){
+        return true;
+    }
+    else if(!testFile.exists()){
+        return false;
+    }
+}
+
+bool MainWindow::performBackup(QString from, QString to)
+{
     ThreadManager mThread;
     ProgressThread* p = new ProgressThread;
     p->setParent(this);
     isBackingUp = true;
-    mThread.setBackupFrom(backupFrom);
-    mThread.setBackupTo(backupTo);
-    p->setFinalFile(backupTo);
+    mThread.setBackupFrom(from);
+    mThread.setBackupTo(to);
+    p->setFinalFile(to);
     ThreadManager *t = new ThreadManager;
     t->setProgressManagerToPass(p);
     t->start();
-
 }
 
 void MainWindow::on_actionNew_Backup_triggered()
